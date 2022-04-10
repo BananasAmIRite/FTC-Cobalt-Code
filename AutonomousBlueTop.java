@@ -65,7 +65,7 @@ public class AutonomousBlueTop extends LinearOpMode {
         r.LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         r.LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         r.setLinearSlidePosition((int) r.theoreticalFullExtension);
-        r.LSExtensionServo.setPosition(r.up);
+        r.LSExtensionServo.setPosition(Robot.LSExtensionServoPosition.TOP);
 
         sleep(1000); // wait for extension servo to go up
 
@@ -88,7 +88,7 @@ public class AutonomousBlueTop extends LinearOpMode {
         r.setMotorTargets(2, Robot.Drive.BACKWARD);
         r.drive(0.05);
 
-        r.LSExtensionServo.setPosition(r.bottom);
+        r.LSExtensionServo.setPosition(Robot.LSExtensionServoPosition.BOTTOM);
 
         sleep(100);
 

@@ -1,14 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Hardware;
-import com.vuforia.VIDEO_BACKGROUND_REFLECTION;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -17,11 +13,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 public class Robot {
-    DcMotor FrontLeft, BackLeft,
+    public DcMotor FrontLeft, BackLeft,
             FrontRight, BackRight,
             CarouselMotor, LinearSlide;
-    CRServo Intake, big, small;
-    Servo LSExtensionServo, horizontal, vertical;
+    public CRServo Intake, big, small;
+    public Servo LSExtensionServo, horizontal, vertical;
     Telemetry telemetry;
     public BNO055IMU imu;
 
@@ -30,8 +26,6 @@ public class Robot {
 
     //angles
     double globalAngle;
-
-    double s = 0;
 
     public final double diameter = 5.75;
     public final double ticksInARotation = 537.7;
@@ -54,9 +48,9 @@ public class Robot {
     //top of the alliance shipping hub is 14.7, assuming the above is the correct slides, it reaches 14.8
     //so alternate fullExtension to use is LinearSlideTicks(14.7);
 
-    final double bottom = 0.760d;
-    // final double middle = 0.45d;
-    final double up = 0.099d;
+//    public final double bottom = 0.760d;
+//    // final double middle = 0.45d;
+//    public final double up = 0.099d;
 
 
     public Robot (Telemetry telemetry, HardwareMap hardwareMap) {
@@ -69,11 +63,6 @@ public class Robot {
          parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
          parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
          parameters.loggingEnabled      = false;
-
-         // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
-         // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
-         // and named "imu".
-         imu = hardwareMap.get(BNO055IMU.class, "imu");
 
          imu.initialize(parameters);
 
@@ -96,6 +85,11 @@ public class Robot {
         LSExtensionServo = hardwareMap.get(Servo.class, "LSExtensionServo");
 //        horizontal = hardwareMap.get(Servo.class, "horizontal");
 //        vertical = hardwareMap.get(Servo.class, "vertical");
+
+        // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
+        // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
+        // and named "imu".
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
 
     }
 
@@ -206,15 +200,6 @@ public class Robot {
         Stop();
     }
 
-    public enum Drive {
-        FORWARD,
-        BACKWARD,
-        TURN_LEFT,
-        TURN_RIGHT,
-        STRAFE_LEFT,
-        STRAFE_RIGHT
-    }
-
     public void setMotorTargets (double inches, Drive drive) {
         encoderMotorReset();
 
@@ -323,4 +308,20 @@ public class Robot {
 
         lastAngle = currentOrientation;
     }
+
+    public static final class LSExtensionServoPosition {
+        public static final double TOP = 0.099d;
+        public static final double BOTTOM = 0.760d;
+        // public static final double middle = 0.45d;
+    }
+
+    public enum Drive {
+        FORWARD,
+        BACKWARD,
+        TURN_LEFT,
+        TURN_RIGHT,
+        STRAFE_LEFT,
+        STRAFE_RIGHT
+    }
+
 }
