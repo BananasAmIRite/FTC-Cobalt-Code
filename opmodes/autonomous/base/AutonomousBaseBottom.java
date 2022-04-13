@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Robot;
 public abstract class AutonomousBaseBottom extends AutonomousBase {
 
     Robot r;
-    private ElapsedTime runtime = new ElapsedTime();
+    private final ElapsedTime runtime = new ElapsedTime();
 
     int mult = 1;
 
@@ -49,7 +49,7 @@ public abstract class AutonomousBaseBottom extends AutonomousBase {
     }
 
     @Override
-    public void runAuto() {
+    protected void runAuto() {
         r = new Robot(telemetry, hardwareMap);
 
         waitForStart();

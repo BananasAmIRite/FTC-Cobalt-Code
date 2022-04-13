@@ -30,7 +30,7 @@ public abstract class AutonomousBase extends LinearOpMode {
 //        if (BitUtils.isBitIn(activations, Activation.UPDATE_ANGLE)) robotThread.interrupt(); // nvm don't need this
     }
 
-    abstract void runAuto() throws InterruptedException;
+    protected abstract void runAuto() throws InterruptedException;
 
     protected abstract void setup() throws InterruptedException;
 
